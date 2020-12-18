@@ -4,8 +4,8 @@ import * as AWS from 'aws-sdk'
 var sqs = new AWS.SQS({ apiVersion: '2012-11-05' });
 AWS.config.update({ region: 'us-east-1' });
 export const hello: APIGatewayProxyHandler = async (event, _context) => {
-  try {  
-    const { body,requestContext: { connectionId, requestTime, eventType, identity: { sourceIp} } } = event;
+  try {
+    const { body, requestContext: { connectionId, requestTime, eventType, identity: { sourceIp } } } = event;
     console.log(event)
 
     const message = {

@@ -19,8 +19,7 @@ const serverlessConfiguration: AWS = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      APIG_ENDPOINT: 'https://t93jhzxfr0.execute-api.us-east-1.amazonaws.com/dev',
-      CONNECTIONS_TABLE: 'connections'
+      TABLE_NAME: 'socket-lambda'
     },
   },
   functions: {
@@ -42,6 +41,10 @@ const serverlessConfiguration: AWS = {
           },
         },
       ]
+    },
+    dynamo: {
+      handler: 'dynamo.main',
+
     }
   }
 }
