@@ -15,36 +15,46 @@ const serverlessConfiguration: AWS = {
     name: 'aws',
     runtime: 'nodejs12.x',
     apiGateway: {
-      minimumCompressionSize: 1024,
+      minimumCompressionSize: 128,
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      TABLE_NAME: 'socket-lambda'
+      TABLE_NAME: ''
     },
   },
   functions: {
-    hello: {
-      handler: 'handler.hello',
+    connect: {
+      handler: './src/socket/connect.connectHandler',
       events: [
         {
           websocket: {
             route: "$connect",
           },
-        }, {
+        }, 
+      ]
+    },
+    disconnect: {
+      handler: './src/socket/disconnect.disconnectHandler',
+      events: [
+        {
           websocket: {
             route: "$disconnect",
           },
-        },
+        }, 
+      ]
+    },
+    default: {
+      handler: './src/socket/default.defaultHandler',
+      events: [
         {
           websocket: {
             route: "$default",
           },
-        },
+        }, 
       ]
     },
     dynamo: {
-      handler: 'dynamo.main',
-
+      handler: './src/database/dynamo.dynamoHandler',
     }
   }
 }
